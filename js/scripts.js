@@ -40,16 +40,33 @@ $().ready(function () {
 		e.preventDefault();
 		let oToppingPrice = {'cheese': 6, 'pepperoni': 8, 'artichoke': 8, 'anchovy': 8};
 		let oSizePrice = {6: 6, 12: 12, 14: 14, 16: 16};
-		let size = parseInt($('#size').val());
-		let pizzaName = $("#name").val();
-		let toppings = [];
-		$("input:checkbox[name=toppings]:checked").each(function () {
-			toppings.push($(this).val());
+		let order = [];
+		$(".pizza").each(() => {
+			let size = parseInt($(this).find(('#size')).val());
+			let pizzaName = $(this).find(("#name")).val();
+			let toppings = [];
+			$(this).find("input:checkbox[name=toppings]:checked").each(function () {
+				toppings.push($(this).val());
+			});
+			order.push(new Pizza(pizzaName, toppings, size));
 		});
-		let pizza = new Pizza(pizzaName, toppings, size);
-
-
 	});
+
+	// show feedback
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	$(".another-pizza").click(function(){
 		let newPizza = `<div class="pizza">
 				<div class="form-group">
