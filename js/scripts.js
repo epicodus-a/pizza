@@ -34,3 +34,53 @@ class Pizza {
 	}
 }
 
+
+$().ready(function () {
+	$('.pizza-form').submit(function (e) {
+		e.preventDefault();
+		let oToppingPrice = {'cheese': 6, 'pepperoni': 8, 'artichoke': 8, 'anchovy': 8};
+		let oSizePrice = {6: 6, 12: 12, 14: 14, 16: 16};
+		let size = parseInt($('#size').val());
+		let pizzaName = $("#name").val();
+		let toppings = [];
+		$("input:checkbox[name=toppings]:checked").each(function () {
+			toppings.push($(this).val());
+		});
+		let pizza = new Pizza(pizzaName, toppings, size);
+
+
+	});
+	$(".another-pizza").click(function(){
+		let newPizza = `<div class="pizza">
+				<div class="form-group">
+					<input type="text" class="form-control" id="name" placeholder="Name Your Pizza">
+				</div>
+				<div class="input-group">
+					<div class="input-group-prepend">
+						<lable class="input-group-text" for="size">Size</lable>
+					</div>
+					<select class="custom-select" id="size">
+						<option value="6">6</option>
+						<option value="12">12</option>
+						<option value="14">14</option>
+						<option value="16">16</option>
+					</select>
+					<div class="input-group-append">
+						<button class="btn btn-outline-secondary" type="button">"</button>
+					</div>
+				</div><!--/#size-->
+				<div class="form-group my-5">
+					<h4 class="text-center my-5">Choose Some Toppings</h4>
+					<div class="form-group">
+						<input type="checkbox" name="toppings" value="Cheese"> Cheese<br>
+						<input type="checkbox" name="toppings" value="pepperoni"> Pepperoni<br>
+						<input type="checkbox" name="toppings" value="artichoke"> Artichoke<br>
+						<input type="checkbox" name="toppings" value="anchovy"> Anchovy<br>
+					</div>
+				</div>
+			</div>
+		</div>`;
+		$("#pizza").append(newPizza);
+	});
+
+});
