@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+	      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+	<link rel="stylesheet" href="css/styles.css">
+	<title>pizza store</title>
+</head>
+<body>
+<div class="container my-5">
+	<form class="pizza-form">
+		<h3 class="text-center my-5 text-uppercase">Order A Pizza</h3>
+		<div id="pizza">
+			<div class="pizza">
+				<div class="form-group">
+					<input type="text" class="form-control" id="name" placeholder="Name Your Pizza">
+				</div>
+				<div class="input-group">
+					<div class="input-group-prepend">
+						<lable class="input-group-text" for="size">Size</lable>
+					</div>
+					<select class="custom-select" id="size">
+						<option value="6">6</option>
+						<option value="12">12</option>
+						<option value="14">14</option>
+						<option value="16">16</option>
+					</select>
+					<div class="input-group-append">
+						<button class="btn btn-outline-secondary" type="button">"</button>
+					</div>
+				</div><!--/#size-->
+				<div class="form-group my-5">
+					<h4 class="text-center my-5">Choose Some Toppings</h4>
+					<div class="form-group">
+						<input type="checkbox" name="toppings" value="Cheese"> Cheese<br>
+						<input type="checkbox" name="toppings" value="pepperoni"> Pepperoni<br>
+						<input type="checkbox" name="toppings" value="artichoke"> Artichoke<br>
+						<input type="checkbox" name="toppings" value="anchovy"> Anchovy<br>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="text-center">
+			<button class="btn btn-danger form-control another-pizza">Order Another Pizza</button>
+		</div>
+		<div class="my-5">
+			<button class="btn btn-outline-info form-control" type="submit">Perchase</button>
+		</div>
+	</form>
+</div>
+
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+<script type="text/javascript" src="js/scripts.js"></script>
+</body>
+</html>
