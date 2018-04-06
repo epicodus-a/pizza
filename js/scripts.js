@@ -38,36 +38,31 @@ class Pizza {
 $().ready(function () {
 	$('.pizza-form').submit(function (e) {
 		e.preventDefault();
+		$(".pizza-list").show();
+
 		let oToppingPrice = {'cheese': 6, 'pepperoni': 8, 'artichoke': 8, 'anchovy': 8};
 		let oSizePrice = {6: 6, 12: 12, 14: 14, 16: 16};
-		let order = [];
-		$(".pizza").each(() => {
-			let size = parseInt($(this).find(('#size')).val());
-			let pizzaName = $(this).find(("#name")).val();
+		$(".pizza").each(function () {
+			let orders = [];
+			let size = parseInt($(this).find(('select#size')).val());
+			let pizzaName = $(this).find(("input#name")).val();
 			let toppings = [];
 			$(this).find("input:checkbox[name=toppings]:checked").each(function () {
 				toppings.push($(this).val());
 			});
-			order.push(new Pizza(pizzaName, toppings, size));
+			orders.push(new Pizza(pizzaName, toppings, size));
+			let pizzaList = `<p class='lead'><a href='${pizzaName}'>${pizzaName}</a></p>`;
+			$(".pizza-list").append(pizzaList);
 		});
 	});
 
 	// show feedback
+	$(".pizza-list").click(() => {
+
+	});
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-	$(".another-pizza").click(function(){
+	$(".another-pizza").click(function () {
 		let newPizza = `<div class="pizza">
 				<div class="form-group">
 					<input type="text" class="form-control" id="name" placeholder="Name Your Pizza">
