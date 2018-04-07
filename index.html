@@ -46,11 +46,52 @@
 				</div>
 			</div>
 		</div>
+		<div class="shipping">
+			<div class="input-group">
+				<div class="input-group-prepend">
+					<div class="input-group-text">
+						<input type="radio" aria-label="Radio button for following text input" name="shipping" value="delivery">
+					</div>
+				</div>
+				<input type="text" class="form-control" aria-label="Text input with radio button"
+				       placeholder="Delivery">
+			</div>
+			<div class="input-group">
+				<div class="input-group-prepend">
+					<div class="input-group-text">
+						<input type="radio" aria-label="Radio button for following text input" name="shipping" value="carryout">
+					</div>
+				</div>
+				<input type="text" class="form-control" aria-label="Text input with radio button"
+				       placeholder="Carryout">
+			</div>
+		</div>
 		<div class="my-5">
 			<button class="btn btn-outline-info form-control" type="submit">Perchase</button>
 		</div>
 	</form>
-
+	<form class="address-form">
+		<div class="delivery-address my-5 row">
+			<div class="col-12">
+				<div class="form-group">
+					<input type="text" class="form-control street" placeholder="street" required>
+				</div>
+			</div>
+			<div class="col-12">
+				<div class="form-group">
+					<input type="text" class="form-control city" placeholder=" city" required>
+				</div>
+			</div>
+			<div class="col-12">
+				<div class="form-group">
+					<input type="text" class="form-control state" placeholder="state" required>
+				</div>
+			</div>
+		</div>
+		<div class="text-center my-5">
+			<button class="btn btn-outline-warning form-control" type="submit">confirm address</button>
+		</div>
+	</form>
 	<div class="text-center">
 		<button class="btn btn-danger form-control another-pizza">Order Another Pizza</button>
 	</div>

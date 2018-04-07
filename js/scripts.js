@@ -34,16 +34,25 @@ class Pizza {
 	}
 }
 
+class Order{
+	constructor(PPizza='', sAddress=''){
+		this.PPizza = PPizza;
+		this.sAddress = sAddress;
+	}
+}
+
 
 $().ready(function () {
+	let orders = [];
+	let order = new Order();
+
 	$('.pizza-form').submit(function (e) {
 		e.preventDefault();
 		$(".pizza-list").show();
-
 		let oToppingPrice = {'cheese': 6, 'pepperoni': 8, 'artichoke': 8, 'anchovy': 8};
 		let oSizePrice = {6: 6, 12: 12, 14: 14, 16: 16};
+
 		$(".pizza").each(function () {
-			let orders = [];
 			let size = parseInt($(this).find(('select#size')).val());
 			let pizzaName = $(this).find(("input#name")).val();
 			let toppings = [];
@@ -51,14 +60,42 @@ $().ready(function () {
 				toppings.push($(this).val());
 			});
 			orders.push(new Pizza(pizzaName, toppings, size));
-			let pizzaList = `<p class='lead'><a href='${pizzaName}'>${pizzaName}</a></p>`;
+			let pizzaList = `<p class='lead'><a href='#'>${pizzaName}</a></p>`;
 			$(".pizza-list").append(pizzaList);
 		});
+
+		// show address form
+		let shipping = $("input:radio[name=shipping]").val();
+		if (shipping === 'delivery'){
+			$(".address-form").show();
+		}
+	});
+
+	$(".address-form").submit(function(e){
+		e.preventDefault();
+		let city = $(".city").val();
+		let state = $(".state").val();
+		let street = $(".street").val();
+		console.log(street);
+		$(".pizza-detail").show();
+		$(".pizza-detail").html(`
+															<p class="lead"><strong>Please confirm your address:</strong></p>
+															    <p class='lead'> Street: <strong>${street}</strong>, City: <strong>${city}</strong>, State: <strong>${state}</strong></p>
+														`);
+
+
 	});
 
 	// show feedback
 	$(".pizza-list").click(() => {
-
+		$(".pizza-detail").show();
+		orders.forEach(pizza => {
+			$(".pizza-detail").html(`
+															<p class='lead'> Pizza Name: ${pizza.sName}</p>
+															<p class='lead'> Toppings: ${pizza.aToppings}</p>
+															<p class='lead'>Pizza Size: ${pizza.iSize}</p>
+														`);
+		});
 	});
 
 
