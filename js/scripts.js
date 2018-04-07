@@ -1,17 +1,6 @@
-// A website for a pizza company where a user can choose one or more individual toppings (cheese, pepperoni,
-// artichoke, anchovy, etc) and a size to order a pizza and see the final cost.
-//
-// 	Allow the user to choose toppings and size for the pizza they'd like to order.
-// Create a pizza object constructor with properties for toppings and size.
-// 	Create a prototype method for the cost of a pizza depending on the selections chosen. Use your own formula for this.
-//
-// Style your site with CSS and images.
-// 	Allow users to order more than one pizza with different toppings.
-// 	Display the list of pizzas ordered as links that can be clicked for details.
-//  Offer a delivery option that then requires address information.
-
+// Business logic
 class Pizza {
-	constructor(sName = '', aToppings = [], iSize = 6) {
+	constructor(sName = 'Cheese Pizza', aToppings = [], iSize = 6) {
 		this.aToppings = aToppings;
 		this.iSize = iSize;
 		this.sName = sName;
@@ -58,6 +47,7 @@ $().ready(function () {
 		let oToppingPrice = {'Cheese': 6, 'Pepperoni': 8, 'Artichoke': 8, 'Anchovy': 8};
 		let oSizePrice = {6: 6, 12: 12, 14: 14, 16: 16};
 
+		// if (size && topping && name) {
 		$(".pizza").each(function () {
 			let size = parseInt($(this).find(('select#size')).val());
 			let pizzaName = $(this).find(("input#name")).val();
@@ -79,8 +69,10 @@ $().ready(function () {
 				order.sAddress = '';
 			}
 			orders.push(order);
-			let orderList = `<p class='lead'><a href='#'>${pizzaName[0].toUpperCase() + pizzaName.slice(1).toLowerCase()}</a></p>`;
-			$(".pizza-list").append(orderList);
+			if (pizzaName && toppings) {
+				let orderList = `<p class='lead'><a href='#'>${pizzaName[0].toUpperCase() + pizzaName.slice(1).toLowerCase()}</a></p>`;
+				$(".pizza-list").append(orderList);
+			}
 		});
 
 		// remove extra pizza field
@@ -103,12 +95,12 @@ $().ready(function () {
 		$(".pizza-detail").show();
 		// caculate order total
 		let total = 0;
+		let detail = '';
+
 		orders.forEach(order => {
 			total += order.orderPrice();
 		});
-		// if address is true, only show address on the first pizza
-		// no delivery, total minus 5 of shipping
-		let detail = '';
+
 		if (orders[0].sAddress) {
 			detail = `<p class='lead'>Please confirm your order: </p>
 												<p class='lead'>Order Address: ${orders[0].sAddress}</p>
@@ -119,14 +111,20 @@ $().ready(function () {
 		}
 
 		orders.forEach(order => {
-														detail += `
-															<p class='lead'> Pizza Name: ${order.PPizza.sName}</p>
-															<p class='lead'>Pizza Size: ${order.PPizza.iSize}</p>
-															<p class='lead'> Toppings: ${order.PPizza.aToppings}</p>
-														`;
+			if (order.PPizza.sName && order.PPizza.iSize && order.PPizza.aToppings) {
+				detail += `
+									<p class='lead'> Pizza Name: ${order.PPizza.sName}</p>
+									<p class='lead'>Pizza Size: ${order.PPizza.iSize}</p>
+									<p class='lead'> Toppings: ${order.PPizza.aToppings}</p>
+									`;
 
+			} else {
+				detail = '<p class="lead">All fields are required</p>';
+				$(".pizza-detail").html(detail);
+			}
 		});
 		$(".pizza-detail").html(detail);
+
 	});
 
 	// add another pizza
@@ -163,6 +161,7 @@ $().ready(function () {
 		$("#pizza").append(newPizza);
 	});
 
+
 	$("#delivery").click(() => {
 		$(".delivery-address").show();
 	});
@@ -171,6 +170,5 @@ $().ready(function () {
 	});
 	$("#reset").click(() => {
 		location.reload();
-	})
-
+	});
 });
