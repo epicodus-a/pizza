@@ -36,13 +36,13 @@ class Pizza {
 
 
 class Order {
-	constructor(PPizza = '', sAddress = '', price=0) {
+	constructor(PPizza = '', sAddress = '', price = 0) {
 		this.PPizza = PPizza;
 		this.sAddress = sAddress;
 		this.price = price;
 	}
 
-	orderPrice (shippingPrice=5){
+	orderPrice(shippingPrice = 5) {
 		return this.price + shippingPrice;
 	}
 
@@ -54,7 +54,6 @@ $().ready(function () {
 	let orders = [];
 	$('.pizza-form').submit(function (e) {
 		e.preventDefault();
-
 		$(".pizza-list").show();
 		let oToppingPrice = {'Cheese': 6, 'Pepperoni': 8, 'Artichoke': 8, 'Anchovy': 8};
 		let oSizePrice = {6: 6, 12: 12, 14: 14, 16: 16};
@@ -71,16 +70,16 @@ $().ready(function () {
 			});
 			let order = new Order();
 			let pizza = new Pizza(pizzaName, toppings, size);
-			let pizzaPrice = pizza.pizzaPrice(oSizePrice,oToppingPrice);
+			let pizzaPrice = pizza.pizzaPrice(oSizePrice, oToppingPrice);
 			order.price = pizzaPrice;
 			order.PPizza = pizza;
-			if(city && street && state){
-			order.sAddress = `${street},  ${city},  ${state}`;
-			}else{
+			if (city && street && state) {
+				order.sAddress = `${street},  ${city},  ${state}`;
+			} else {
 				order.sAddress = '';
 			}
 			orders.push(order);
-			let orderList = `<p class='lead'><a href='#'>${pizzaName}</a></p>`;
+			let orderList = `<p class='lead'><a href='#'>${pizzaName[0].toUpperCase() + pizzaName.slice(1).toLowerCase()}</a></p>`;
 			$(".pizza-list").append(orderList);
 		});
 
@@ -90,48 +89,49 @@ $().ready(function () {
 		// empty fields
 		$("input").val("");
 		$("#size").val("");
-		$('input:checkbox[name=toppings]').each(function(index, element) {
-			var checked = element.checked;
+		$('input:checkbox[name=toppings]').each(function (index, topping) {
+			let checked = topping.checked;
 			if (checked) {
-				$(element).trigger('click');
+				$(topping).trigger('click');
 			}
 		});
-		});
+	});
 
 
-
-		// show feedback
-		$(".pizza-list").click(() => {
-			$(".pizza-detail").show();
+	// show feedback
+	$(".pizza-list").click(() => {
+		$(".pizza-detail").show();
 		// caculate order total
-			let total = 0;
-			orders.forEach( order => {
-				total += order.orderPrice();
-			});
-			// if address is true, only show address on the first pizza
-			let detail = '';
-			if(orders[0].sAddress){
-				detail = `<p class='lead'>Please confirm your order: </p>
+		let total = 0;
+		orders.forEach(order => {
+			total += order.orderPrice();
+		});
+		// if address is true, only show address on the first pizza
+		// no delivery, total minus 5 of shipping
+		let detail = '';
+		if (orders[0].sAddress) {
+			detail = `<p class='lead'>Please confirm your order: </p>
 												<p class='lead'>Order Address: ${orders[0].sAddress}</p>
 												<p class='lead'>Order total: $ ${total}</p>`;
-			}else{
-				detail = `<p class='lead'>Please confirm your order: </p>
+		} else {
+			detail = `<p class='lead'>Please confirm your order: </p>
 												<p class='lead'>Order total: $ ${total - 5}</p>`;
-			}
+		}
 
-			orders.forEach(order => {
-									detail +=  `
+		orders.forEach(order => {
+														detail += `
 															<p class='lead'> Pizza Name: ${order.PPizza.sName}</p>
 															<p class='lead'>Pizza Size: ${order.PPizza.iSize}</p>
 															<p class='lead'> Toppings: ${order.PPizza.aToppings}</p>
 														`;
 
-			});
-			$(".pizza-detail").html(detail);
 		});
+		$(".pizza-detail").html(detail);
+	});
 
-		$(".another-pizza").click(function () {
-			let newPizza = `<div class="pizza my-5">
+	// add another pizza
+	$(".another-pizza").click(function () {
+		let newPizza = `<div class="pizza my-5">
 				<div class="form-group">
 					<input type="text" class="form-control" id="name" placeholder="Name Your Pizza">
 				</div>
@@ -160,17 +160,17 @@ $().ready(function () {
 				</div>
 
 			</div>`;
-			$("#pizza").append(newPizza);
-		});
-
-		$("#delivery").click(() => {
-			$(".delivery-address").show();
-		});
-		$("#carryout").click(() => {
-			$(".delivery-address").hide();
-		});
-		$("#reset").click( () => {
-			location.reload();
-		})
-
+		$("#pizza").append(newPizza);
 	});
+
+	$("#delivery").click(() => {
+		$(".delivery-address").show();
+	});
+	$("#carryout").click(() => {
+		$(".delivery-address").hide();
+	});
+	$("#reset").click(() => {
+		location.reload();
+	})
+
+});
